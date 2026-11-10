@@ -20,7 +20,13 @@ app.use(notFound);
 app.use(errorHandler);
 
 if (require.main === module) {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => console.log(`ReturnIQ API on http://localhost:${PORT}`));
+ const PORT = process.env.PORT || 5000;
+
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`ReturnIQ API on http://localhost:${PORT}`);
+  });
+}
 }
 module.exports = app;
+ 
